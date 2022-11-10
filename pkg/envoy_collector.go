@@ -2,7 +2,8 @@ package pkg
 
 import (
 	"log"
-	"github.com/nik-johnson-net/go-envoy"
+	//"envoy"
+	//"github.com/nik-johnson-net/go-envoy"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -49,8 +50,14 @@ func (s *EnvoyCollector) Describe(chan<- *prometheus.Desc) {
 }
 
 func (s *EnvoyCollector) Collect(metrics chan<- prometheus.Metric) {
-	client := envoy.NewClient(s.target)
-
+	client := NewClient(s.target)
+	_, err := client.JWTCheck()
+	if err != nil {
+		//log.Fatal(err)
+		log.Printf("to check token %s: %s\n", s.target, err.Error())
+		return
+	}
+	
 	production, err := client.Production()
 	if err != nil {
 		log.Printf("failed to get production data from device %s: %s\n", s.target, err.Error())

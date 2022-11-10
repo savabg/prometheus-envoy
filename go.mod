@@ -8,5 +8,5 @@ require (
 	github.com/nik-johnson-net/prometheus-proxy v1.0.0
 	github.com/prometheus/client_golang v1.6.0
 	github.com/prometheus/common v0.10.0 // indirect
-	golang.org/x/sys v0.0.0-20200519105757-fe76b779f299 // indirect
+	golang.org/x/sys v0.2.0 // indirect
 )
